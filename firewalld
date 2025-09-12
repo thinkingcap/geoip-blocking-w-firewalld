@@ -54,7 +54,7 @@ elif [[ -x "$APT" ]]; then
     echo -e "[${PURPLE}i${NC}] Detected operating system as Debian/Ubuntu"
 else
     echo -e "[${RED}✗${NC}] Couldn't determine the current OS. Aborting!"
-	exit 1
+    exit 1
 fi
 
 echo -e "[${PURPLE}i${NC}] Verifying if firewalld is available"
@@ -131,8 +131,8 @@ if [[ $? -eq 0 ]];then
     echo ""
     for z in $ZONES; do
         echo -e "[${PURPLE}i${NC}] Downloading zone ${YELLOW}$z${NC}"
-        curl -L -o $TMPDIR/$z-ip4.zone https://www.ipdeny.com/ipblocks/data/countries/$z.zone > /dev/null 2> /dev/null
-        curl -L -o $TMPDIR/$z-ip6.zone https://www.ipdeny.com/ipv6/ipaddresses/blocks/$z.zone > /dev/null 2> /dev/null
+        curl -s -L -o "$TMPDIR/$z-ip4.zone" "https://www.ipdeny.com/ipblocks/data/aggregated/${z,,}-aggregated.zone" > /dev/null 2> /dev/null
+        curl -s -L -o "$TMPDIR/$z-ip6.zone" "https://www.ipdeny.com/ipv6/ipaddresses/aggregated/${z,,}-aggregated.zone" > /dev/null 2> /dev/null
         if [[ $? -eq 0 ]];then
             echo -e "[${GREEN}✓${NC}] OK"
         else
@@ -153,9 +153,9 @@ else
 fi
 
 # Load the zone(s) into the blacklist
-for f in $TMPDIR/*-ip4.zone; do
+for f in "$TMPDIR"/*-ip4.zone; do
     echo -e "[${PURPLE}i${NC}] Adding ipv4 target ranges from ${YELLOW}$f${NC}"
-    firewall-cmd --permanent --ipset="${BLACKLIST}-ip4" --add-entries-from-file=$f > /dev/null
+    firewall-cmd --permanent --ipset="${BLACKLIST}-ip4" --add-entries-from-file="$f" > /dev/null
     if [[ $? -eq 0 ]];then
         echo -e "[${GREEN}✓${NC}] OK"
     else
@@ -164,9 +164,9 @@ for f in $TMPDIR/*-ip4.zone; do
     echo ""
 done
 
-for f in $TMPDIR/*-ip6.zone; do
+for f in "$TMPDIR"/*-ip6.zone; do
     echo -e "[${PURPLE}i${NC}] Adding ipv6 target ranges from ${YELLOW}$f${NC}"
-    firewall-cmd --permanent --ipset="${BLACKLIST}-ip6" --add-entries-from-file=$f > /dev/null
+    firewall-cmd --permanent --ipset="${BLACKLIST}-ip6" --add-entries-from-file="$f" > /dev/null
     if [[ $? -eq 0 ]];then
         echo -e "[${GREEN}✓${NC}] OK"
     else
@@ -198,5 +198,9 @@ rm -rf $TMPDIR
 
 echo ""
 
-echo -e "[${PURPLE}i${NC}] Blocking approx. ${YELLOW}$(ipset list ${BLACKLIST}-ip4 | wc -l)${NC} ipv4 target ranges and approx. ${YELLOW}$(ipset list ${BLACKLIST}-ip6 | wc -l)${NC} ipv6 target ranges."
+IPV4_COUNT=$(firewall-cmd --permanent --ipset=${BLACKLIST}-ip4 --get-entries | wc -l)
+IPV6_COUNT=$(firewall-cmd --permanent --ipset=${BLACKLIST}-ip6 --get-entries | wc -l)
+
+echo -e "[${PURPLE}i${NC}] Blocking approx. ${YELLOW}${IPV4_COUNT}${NC} ipv4 target ranges and approx. ${YELLOW}${IPV6_COUNT}${NC} ipv6 target ranges."
+
 echo -e "[${GREEN}✓${NC}] Firewall successfully configured!"
