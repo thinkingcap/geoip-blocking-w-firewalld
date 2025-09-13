@@ -15,7 +15,7 @@
 #| Options
 #|--------------------------------------------------------------------------
 
-ZONES="bg br by cn cy eg id ir lt my ph pk ro ru tr ua" # Retrieve the zone's name here https://www.ipdeny.com/ipblocks/
+ZONES="bg br by cn cy eg id ir iq lt my ph pk ro ru tr ua" # Retrieve the zone's name here https://www.ipdeny.com/ipblocks/
 BLACKLIST="geoip-blacklist"
 TMPDIR="/tmp/geoip"
 
