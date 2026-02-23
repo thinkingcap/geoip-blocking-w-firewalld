@@ -62,6 +62,8 @@
 49.145.128.0/17
 #reltid.com.ar
 190.92.104.0/21
+#Telecentro S.A. - Clientes Residenciales
+190.55.252.0/22
 
 # Cin7 Core IP address: 23.96.51.98
 # Cin7 Core mail server IP address: 149.72.123.201 and 149.72.21.232
