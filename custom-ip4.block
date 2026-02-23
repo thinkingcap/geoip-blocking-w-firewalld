@@ -15,6 +15,7 @@
 188.138.40.0/22
 #Artmotion
 84.22.55.0/24
+185.173.207.0/24
 #Dish Home
 103.190.40.0/24
 #Alibaba
@@ -64,6 +65,8 @@
 190.92.104.0/21
 #Telecentro S.A. - Clientes Residenciales
 190.55.252.0/22
+#ZAIN.com
+176.28.128.0/17
 
 # Cin7 Core IP address: 23.96.51.98
 # Cin7 Core mail server IP address: 149.72.123.201 and 149.72.21.232
