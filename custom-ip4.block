@@ -30,41 +30,61 @@
 #NL-NH
 158.173.20.0/24
 158.173.21.0/24
+
+#Hetzner
+95.216.0.0/15
+
 #United Information Highway
 103.40.140.0/22
+
 #WowRack
 216.244.66.0/24
+
 #ServerOffer
 91.224.92.0/24
+
 #Tesonet
 185.190.238.0/23
+
 #TerraTransit
 185.184.200.0/23
 185.194.39.0/24
+
 #Facebook
 57.141.14.0/24
+
 #Cogent Communications
 149.88.0.0/16
+
 #Vietnam Posts and Telecommunications Group
 #14.160.0.0/14
 #14.192.0.0/15
 14.160.0.0/11
+
 #Azure (malware scanning)
 4.197.248.250
 4.189.129.123
+
 #Servers Tech
+91.84.96.0/19
+91.244.196.0/22
 185.121.235.0/24
+195.26.224.0/24
 #91.84.96.0/19
 91.84.119.96/27
 91.84.119.128/25
 #91.84.113.0/24
 185.157.213.0/24
+
 #Philippine Long Distance Telephone
 49.145.128.0/17
+
 #reltid.com.ar
 190.92.104.0/21
+
 #Telecentro S.A. - Clientes Residenciales
 190.55.252.0/22
+
 #ZAIN.com
 176.28.128.0/17
 
